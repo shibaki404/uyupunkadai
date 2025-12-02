@@ -18,13 +18,26 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // 数字のみ入力できるようにする
-    postalCodeInput.addEventListener('input', (e) => {
-        e.target.value = e.target.value.replace(/[^0-9]/g, '');
-    });
+    // 全角数字を半角に変換する関数
+    function convertToHalfWidth(str) {
+        return str.replace(/[０-９]/g, (s) => {
+            return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
+        });
+    }
+
+    // 郵便番号を正規化する関数（全角→半角、ハイフン・スペース削除）
+    function normalizePostalCode(str) {
+        // 全角数字を半角に変換
+        let normalized = convertToHalfWidth(str);
+        // ハイフン、スペース、全角スペースを削除
+        normalized = normalized.replace(/[-ー\s　]/g, '');
+        // 数字のみを抽出
+        normalized = normalized.replace(/[^0-9]/g, '');
+        return normalized;
+    }
 
     async function searchAddress() {
-        const postalCode = postalCodeInput.value.replace(/[^0-9]/g, '');
+        const postalCode = normalizePostalCode(postalCodeInput.value);
 
         // バリデーション
         if (postalCode.length !== 7) {
