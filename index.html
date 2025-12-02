@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>郵便番号検索アプリ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>郵便番号検索</h1>
+
+        <div class="search-section">
+            <label for="postal-code">郵便番号</label>
+            <div class="input-group">
+                <input
+                    type="text"
+                    id="postal-code"
+                    placeholder="例: 1000001"
+                    maxlength="8"
+                >
+                <button id="search-btn">検索</button>
+            </div>
+            <small>※ハイフンなしで入力してください</small>
+        </div>
+
+        <div id="loading" class="loading" style="display: none;">
+            検索中...
+        </div>
+
+        <div id="error-message" class="error" style="display: none;"></div>
+
+        <div class="address-section">
+            <div class="form-group">
+                <label for="prefecture">都道府県</label>
+                <input type="text" id="prefecture" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="city">市区町村</label>
+                <input type="text" id="city" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="town">町域</label>
+                <input type="text" id="town" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="full-address">住所（全体）</label>
+                <input type="text" id="full-address" readonly>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
